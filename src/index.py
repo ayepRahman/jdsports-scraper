@@ -14,24 +14,23 @@ from selenium.webdriver.remote.webelement import WebElement
 
 chrome_driver_path = "/Users/arifrahman/Code/drivers/chromedriver"
 url = 'https://www.jdsports.com.sg'
-page_range = 9
+page_range = 3
 path = Path.cwd()
 data_folder = path / 'src/data'
-brand = 'adidas,adidas-originals'
-
+brand = ['nike', 'puma', 'adidas,adidas-originals']
 
 print(chrome_driver_path)
 
 
 def save_data_to_file(data):
     # open file and write as json format
-    with open(data_folder / f"{brand}_data.json", 'w') as json_file:
+    with open(data_folder / f"{brand[0]}_data.json", 'w') as json_file:
         json.dump(data, json_file)
         print('Succefully dump json')
 
 
 def get_url(brand: str):
-    return f'{url}/men/mens-footwear/brand/{brand}'
+    return f'{url}/men/mens-footwear/brand/{brand[0]}'
 
 
 # declare and intialiase driver, change this as require
@@ -57,11 +56,11 @@ def remove_prefix(text: str, prefix: str):
 
 def main():
     try:
-        print(f'[Start]: extraction from {get_url(brand)}')
+        print(f'[Start]: extraction from {get_url(brand[0])}')
         # browser should be loaded in maximized window, to ensure consistency on what to scrape
         driver.maximize_window()
         # open brower and control website
-        driver.get(get_url(brand))
+        driver.get(get_url(brand[0]))
 
         mapped_items = []
 
@@ -105,7 +104,8 @@ def main():
                 mapped_items.append({
                     "name": name,
                     "imgUrl": imgUrl,
-                    "price": price
+                    "price": price,
+                    "brand": brand[0]
                 })
             # navigate to next page when finished traversing all list of items.
             nextPageButton.click()
