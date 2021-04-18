@@ -3,7 +3,7 @@ import pymongo
 import os
 import json
 
-data_name = ['nike', 'puma', 'adidas,adidas-originals_data']
+data_name = ['nike', 'puma', 'adidas,adidas-originals']
 db_name = 'sneakus'
 
 user = os.environ.get('mongo_user')
@@ -15,7 +15,7 @@ products = db.products
 print(client.list_database_names())  # output: ['admin', 'local']
 print(db.list_collection_names())  # output: []
 
-with open(f'src/data/{data_name[0]}.json') as json_file:
+with open(f'src/data/{data_name[2]}_data.json') as json_file:
     products_json = json.load(json_file)
     print('products_json >>>', products_json)
     products.insert_many(products_json)
