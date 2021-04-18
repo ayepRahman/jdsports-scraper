@@ -1,2 +1,4 @@
+pathlib==1.0.1
+pymongo==3.11.3
 selenium==3.141.0
 urllib3==1.26.4
