@@ -3,15 +3,14 @@ import pymongo
 import os
 import json
 
-
-data_name = 'nike_data'
-# data_name = 'adidas,adidas-originals_data'
+data_name = 'adidas,adidas-originals_data'
+db_name = 'sneakus'
 
 user = os.environ.get('mongo_user')
 password = os.environ.get('mongo_password')
-url = 'mongodb://127.0.0.1:27017/sneakus' or f'mongodb+srv://{user}:{password}@cluster0-ysglw.mongodb.net/'
+url = f'mongodb://127.0.0.1:27017/{db_name}'
 client = pymongo.MongoClient(url)
-db = client.amazon_clone
+db = client[db_name]
 products = db.products
 print(client.list_database_names())  # output: ['admin', 'local']
 print(db.list_collection_names())  # output: []
